@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dds7g48ullr65"]
+
+[ext_resource type="PackedScene" path="res://scenes/wall.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://c2g2cklpechbi" path="res://scenes/brick.tscn" id="2_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://c6l14gnt8fyl8" path="res://scenes/player_paddle.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://d4ukf14pt77j" path="res://scenes/game_manager.tscn" id="4_lbhrr"]
+
+[node name="Game" type="Node2D" unique_id=243312625]
+
+[node name="Walls" type="Node2D" parent="." unique_id=1417446320]
+
+[node name="Wall" parent="Walls" unique_id=754545563 instance=ExtResource("1_uwrxv")]
+position = Vector2(576, 0)
+
+[node name="Wall2" parent="Walls" unique_id=1860895755 instance=ExtResource("1_uwrxv")]
+position = Vector2(0, 324)
+rotation = 1.5707964
+scale = Vector2(0.575, 1)
+
+[node name="Wall3" parent="Walls" unique_id=286505168 instance=ExtResource("1_uwrxv")]
+position = Vector2(1152, 324)
+rotation = 1.5707964
+scale = Vector2(0.575, 1)
+
+[node name="Bricks" type="Node2D" parent="." unique_id=7822622]
+
+[node name="Brick" parent="Bricks" unique_id=2036982497 instance=ExtResource("2_lbhrr")]
+position = Vector2(128, 64)
+
+[node name="Brick2" parent="Bricks" unique_id=673304291 instance=ExtResource("2_lbhrr")]
+position = Vector2(272, 128)
+
+[node name="Brick3" parent="Bricks" unique_id=1735095550 instance=ExtResource("2_lbhrr")]
+position = Vector2(488, 72)
+
+[node name="Brick4" parent="Bricks" unique_id=834239465 instance=ExtResource("2_lbhrr")]
+position = Vector2(712, 176)
+
+[node name="Brick5" parent="Bricks" unique_id=884697356 instance=ExtResource("2_lbhrr")]
+position = Vector2(928, 72)
+
+[node name="Brick6" parent="Bricks" unique_id=773963935 instance=ExtResource("2_lbhrr")]
+position = Vector2(1040, 184)
+
+[node name="Brick7" parent="Bricks" unique_id=783488137 instance=ExtResource("2_lbhrr")]
+position = Vector2(872, 272)
+
+[node name="Brick8" parent="Bricks" unique_id=7686021 instance=ExtResource("2_lbhrr")]
+position = Vector2(512, 184)
+
+[node name="Brick9" parent="Bricks" unique_id=1766010408 instance=ExtResource("2_lbhrr")]
+position = Vector2(336, 264)
+
+[node name="Brick10" parent="Bricks" unique_id=1286792888 instance=ExtResource("2_lbhrr")]
+position = Vector2(112, 208)
+
+[node name="PlayerPaddle" parent="." unique_id=1626158913 instance=ExtResource("3_lnu2h")]
+position = Vector2(576, 624)
+
+[node name="GameManager" parent="." unique_id=38976390 node_paths=PackedStringArray("ball_spawn_position") instance=ExtResource("4_lbhrr")]
+ball_spawn_position = NodePath("../BallSpawnPosition")
+
+[node name="BallSpawnPosition" type="Marker2D" parent="." unique_id=2067019315]
+position = Vector2(576, 600)

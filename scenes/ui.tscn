@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://b144f5xrki8ny"]
+
+[ext_resource type="Script" uid="uid://tspn4y4cj1o6" path="res://scripts/ui.gd" id="1_nt7q6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nt7q6"]
+
+[node name="UI" type="Control" unique_id=868522195 node_paths=PackedStringArray("hp_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nt7q6")
+hp_label = NodePath("Panel/HBoxContainer/HPLabel")
+
+[node name="Panel" type="Panel" parent="." unique_id=127844574]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nt7q6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=821633166]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -57.0
+offset_right = 57.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/separation = 200
+
+[node name="ScoreLabel" type="Label" parent="Panel/HBoxContainer" unique_id=1880576860]
+layout_mode = 2
+text = "123"
+
+[node name="HPLabel" type="Label" parent="Panel/HBoxContainer" unique_id=440477710]
+layout_mode = 2
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="Panel/HBoxContainer" unique_id=397386035]
+layout_mode = 2
+text = "LEVEL 01"

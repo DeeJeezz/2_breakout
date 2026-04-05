@@ -2,10 +2,11 @@ extends RigidBody2D
 class_name Ball
 
 const THRUST: Vector2 = Vector2(0, -42500.0)
-const RANDOM_ROTATION_ANGLE: float = 22.5
+const IMPULSE: Vector2 = Vector2(0, 10)
+const RANDOM_ROTATION_ANGLE: float = 30
 
-@export var sprite: Sprite2D
-@export var collision_shape: CollisionShape2D
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 
 func _ready() -> void:
@@ -29,4 +30,5 @@ func _get_random_angle_radians() -> float:
 
 func _on_body_entered(body: Node) -> void:
 	if body is Brick:
-		body.queue_free()
+		body.destroy()
+		apply_central_impulse(IMPULSE)

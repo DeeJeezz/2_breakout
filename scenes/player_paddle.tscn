@@ -1,16 +1,14 @@
 [gd_scene format=3 uid="uid://c6l14gnt8fyl8"]
 
 [ext_resource type="Script" uid="uid://bx0lxr82du6u5" path="res://scripts/player_paddle.gd" id="1_uktar"]
-[ext_resource type="PackedScene" uid="uid://1exh55onmf0w" path="res://scenes/paddle.tscn" id="1_yyijc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyijc"]
 
-[node name="PlayerPaddle" type="StaticBody2D" unique_id=1626158913 node_paths=PackedStringArray("paddle", "collision_shape")]
+[node name="PlayerPaddle" type="StaticBody2D" unique_id=1626158913]
 script = ExtResource("1_uktar")
-paddle = NodePath("Paddle")
-collision_shape = NodePath("CollisionShape2D")
+color = Color(1, 1, 1, 1)
 
-[node name="Paddle" parent="." unique_id=116004516 instance=ExtResource("1_yyijc")]
+[node name="PaddleBlocks" type="Node2D" parent="." unique_id=1905045364]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2122831647]
 shape = SubResource("RectangleShape2D_yyijc")

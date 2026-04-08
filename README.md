@@ -2,6 +2,10 @@
 
 https://20_games_challenge.gitlab.io/games/breakout/
 
+## Where to play
+
+Itch.io - https://deejeezz.itch.io/breakout
+
 ## Description
 
 Atari’s first successful game (Pong) was massively successful, but many companies made clones of the game, which eroded Atari’s profits. 

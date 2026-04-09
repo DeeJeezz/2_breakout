@@ -5,8 +5,12 @@ const THRUST: Vector2 = Vector2(0, -42500.0)
 const IMPULSE: Vector2 = Vector2(0, 10)
 const RANDOM_ROTATION_ANGLE: float = 30
 
+const CEILING_GROUP_NAME: String = "ceiling"
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var brick_hit_sfx: AudioStreamPlayer = $SFX/BrickHitSFX
+@onready var paddle_hit_sfx: AudioStreamPlayer = $SFX/PaddleHitSFX
 
 
 func _ready() -> void:
@@ -29,6 +33,13 @@ func _get_random_angle_radians() -> float:
 
 
 func _on_body_entered(body: Node) -> void:
+	if body.is_in_group(CEILING_GROUP_NAME):
+		Signals.ceiling_touched.emit()
+
 	if body is Brick:
-		body.destroy()
+		Signals.brick_destroyed.emit(body)
 		apply_central_impulse(IMPULSE)
+		brick_hit_sfx.pitch_scale = randf_range(0.9, 1.2)
+		brick_hit_sfx.play()
+	elif body is PlayerPaddle:
+		paddle_hit_sfx.play()

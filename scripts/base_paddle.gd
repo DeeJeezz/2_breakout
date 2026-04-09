@@ -1,14 +1,14 @@
 extends StaticBody2D
 class_name BasePaddle
 
-
-const SPEED: float = 625.0
 const _WALL_OFFSET: float = 7.5
 
 @export var color: Color
 @export var paddle_size: int = 3
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
+var speed: float = 650.0
 
 var _screen_size: Vector2
 var _left_border: Vector2

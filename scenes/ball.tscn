@@ -2,6 +2,8 @@
 
 [ext_resource type="PhysicsMaterial" uid="uid://baedaes60exvy" path="res://materials/ball_physics_material.tres" id="1_7s4qf"]
 [ext_resource type="Script" uid="uid://dyxo2maiub3vl" path="res://scripts/ball.gd" id="2_cxlvu"]
+[ext_resource type="AudioStream" uid="uid://bfkl3kf86jrn2" path="res://assets/sfx/bounce.wav" id="3_f7cbr"]
+[ext_resource type="AudioStream" uid="uid://cv6r8fj8pe35f" path="res://assets/sfx/paddle_hit.wav" id="4_4dx81"]
 
 [sub_resource type="Gradient" id="Gradient_7s4qf"]
 offsets = PackedFloat32Array(0, 0.8358209, 0.89179105)
@@ -33,5 +35,15 @@ texture = SubResource("GradientTexture2D_cxlvu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1606993518]
 shape = SubResource("CircleShape2D_f7cbr")
+
+[node name="SFX" type="Node2D" parent="." unique_id=164336911]
+
+[node name="BrickHitSFX" type="AudioStreamPlayer" parent="SFX" unique_id=1623219398]
+stream = ExtResource("3_f7cbr")
+volume_db = -10.0
+
+[node name="PaddleHitSFX" type="AudioStreamPlayer" parent="SFX" unique_id=41817628]
+stream = ExtResource("4_4dx81")
+volume_db = -10.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

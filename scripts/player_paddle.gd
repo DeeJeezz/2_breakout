@@ -3,21 +3,35 @@ class_name PlayerPaddle
 
 
 const _PADDLE_BLOCK_OFFSET: float = 2
+const _MINIMAL_PADDLE_SIZE: int = 3
+const _SPEED_STEP_WHILE_REDUCING: float = 25.0
 
 
 @onready var paddle_block_scene: PackedScene = preload("res://scenes/paddle_block.tscn")
-
 @onready var paddle_blocks: Node2D = $PaddleBlocks
+
+var _paddle_block_size: Vector2
 
 
 func _ready() -> void:
 	# TODO: Убрать инстанс этого блока.
 	var middle_block: PaddleBlock = paddle_block_scene.instantiate()
+	_paddle_block_size = middle_block.get_size()
+	middle_block.queue_free()
 	
-	var paddle_block_width: float = middle_block.get_size().x + _PADDLE_BLOCK_OFFSET
-	var paddle_block_height: float = middle_block.get_size().y
+	_build_paddle()
+			
+	super._ready()
+
+
+func _build_paddle() -> void:
+	
+	for child in paddle_blocks.get_children():
+		child.queue_free()
 	
 	# TODO: Почему -1?
+	var paddle_block_width: float = _paddle_block_size.x + _PADDLE_BLOCK_OFFSET
+	
 	var paddle_width: float = paddle_block_width * (paddle_size - 1)
 	var half_distance: float = paddle_width / 2
 	
@@ -31,16 +45,22 @@ func _ready() -> void:
 	# TODO: Почему выше -1?
 	collision_shape.shape.size = Vector2(
 		paddle_width + paddle_block_width,
-		paddle_block_height,
+		_paddle_block_size.y,
 	)
-			
-	super._ready()
+
+
+func reduce_paddle() -> void:
+	if paddle_size > _MINIMAL_PADDLE_SIZE:
+		paddle_size -= 1
+
+	_build_paddle()
+	speed += _SPEED_STEP_WHILE_REDUCING
 
 
 func _handle_input(delta: float) -> void:
 	var input: float = Input.get_axis("move_left", "move_right")
 	if input:
-		position.x += input * delta * SPEED
+		position.x += input * delta * speed
 
 
 func _process(delta: float) -> void:

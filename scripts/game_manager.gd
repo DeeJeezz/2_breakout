@@ -32,6 +32,11 @@ func _ready() -> void:
 	# Setup constants.
 	_screen_size = get_viewport_rect().size
 	
+	# Load save game.
+	SaveManager.load_last_session()
+	if SaveManager.last_session and "score" in SaveManager.last_session:
+		ui.set_record_score(SaveManager.last_session["score"])
+	
 	# Setup UI.
 	_hp = _MAX_HP
 	_current_score = 0
@@ -88,6 +93,8 @@ func _launch_ball() -> void:
 
 func _check_game_over() -> void:
 	_hp -= 1
+	if _hp <= 0:
+		_game_over()
 	
 
 func _check_if_ball_leave_screen() -> void:
@@ -108,6 +115,21 @@ func _handle_input() -> void:
 	if !get_tree().paused:
 		if Input.is_action_just_pressed("menu"):
 			_pause_game()
+
+
+func _game_over() -> void:
+	# Saving only highscore records.
+	if SaveManager.last_session and "score" in SaveManager.last_session:
+		if SaveManager.last_session["score"] < _current_score:
+			ui.set_record_score(_current_score)
+			SaveManager.save_current_session({"score": _current_score})
+	else:
+		ui.set_record_score(_current_score)
+		SaveManager.save_current_session({"score": _current_score})
+
+	ui.game_over(_current_score)
+	get_tree().paused = true
+	
 
 
 func _process(_delta: float) -> void:

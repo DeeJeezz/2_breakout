@@ -1,5 +1,8 @@
 # Breakout
 
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/deejeezz/2_breakout/deploy-itch.yml)
+![GitHub Tag](https://img.shields.io/github/v/tag/deejeezz/2_breakout)
+
 https://20_games_challenge.gitlab.io/games/breakout/
 
 ## Where to play

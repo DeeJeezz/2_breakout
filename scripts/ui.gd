@@ -1,9 +1,12 @@
 extends CanvasLayer
 class_name UI
 
-@export_category("Labels")
-@export var hp_label: Label
-@export var score_label: Label
+@export_category("HUD")
+@export var hud_hp_label: Label
+@export var hud_score_label: Label
+@export var hud_record_label: Label
+
+@export_category("Game over screen")
 @export var record_score_label: Label
 @export var game_over_score_label: Label
 
@@ -17,11 +20,11 @@ class_name UI
 
 
 func set_hp(hp: int) -> void:
-	hp_label.text = "%s" % hp
+	hud_hp_label.text = "%s" % hp
 
 
 func set_score(score: int) -> void:
-	score_label.text = "%s" % score
+	hud_score_label.text = "%s" % score
 
 
 func show_menu() -> void:
@@ -40,6 +43,10 @@ func game_over(score: int) -> void:
 	
 	
 func set_record_score(score: int) -> void:
+	if score > 0:
+		hud_record_label.text = "%s" % score
+	else:
+		hud_record_label.text = ""
 	record_score_label.text = "Max score: %s" % score
 	print(record_score_label.text)
 

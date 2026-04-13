@@ -34,8 +34,8 @@ func _ready() -> void:
 	
 	# Load save game.
 	SaveManager.load_last_session()
-	if SaveManager.last_session and "score" in SaveManager.last_session:
-		ui.set_record_score(SaveManager.last_session["score"])
+	var record_score: int = SaveManager.last_session.get("score", 0)
+	ui.set_record_score(record_score)
 	
 	# Setup UI.
 	_hp = _MAX_HP

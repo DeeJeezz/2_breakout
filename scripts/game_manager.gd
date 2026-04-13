@@ -14,6 +14,8 @@ const _BASE_SCORE: int = 700
 
 @export var loose_sfx: AudioStreamPlayer
 
+var _game_started: bool = false
+
 
 var _current_ball: Ball
 var _screen_size: Vector2
@@ -35,7 +37,7 @@ func _ready() -> void:
 	# Load save game.
 	SaveManager.load_last_session()
 	var record_score: int = SaveManager.last_session.get("score", 0)
-	ui.set_record_score(record_score)
+	ui.prepare_game(record_score)
 	
 	# Setup UI.
 	_hp = _MAX_HP
@@ -52,11 +54,15 @@ func _ready() -> void:
 	
 
 func _pause_game() -> void:
+	if !_game_started:
+		ui.hide_start_screen()
 	get_tree().paused = true
 	ui.show_menu()
 	
 	
 func _on_resume_game() -> void:
+	if !_game_started:
+		ui.show_start_screen()
 	get_tree().paused = false
 	ui.hide_menu()
 	
@@ -84,6 +90,9 @@ func _on_ceiling_touched() -> void:
 
 
 func _launch_ball() -> void:
+	if !_game_started:
+		_game_started = true
+		ui.hide_start_screen()
 	var ball: Ball = ball_scene.instantiate()
 	ball.global_position = ball_spawn_position.global_position
 	add_child(ball)
@@ -119,13 +128,12 @@ func _handle_input() -> void:
 
 func _game_over() -> void:
 	# Saving only highscore records.
-	if SaveManager.last_session and "score" in SaveManager.last_session:
-		if SaveManager.last_session["score"] < _current_score:
-			ui.set_record_score(_current_score)
-			SaveManager.save_current_session({"score": _current_score})
-	else:
+	var last_record_score: int = SaveManager.last_session.get("score", 0)
+	if last_record_score < _current_score:
 		ui.set_record_score(_current_score)
 		SaveManager.save_current_session({"score": _current_score})
+	else:
+		ui.set_record_score(last_record_score)
 
 	ui.game_over(_current_score)
 	get_tree().paused = true

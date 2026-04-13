@@ -14,7 +14,7 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yev5y"]
 texture = ExtResource("2_x4jx1")
 
-[node name="UI" type="CanvasLayer" unique_id=1145067854 node_paths=PackedStringArray("hud_hp_label", "hud_score_label", "hud_record_label", "record_score_label", "game_over_score_label", "menu_panel", "game_over_panel", "pause_sfx", "resume_sfx")]
+[node name="UI" type="CanvasLayer" unique_id=1145067854 node_paths=PackedStringArray("hud_hp_label", "hud_score_label", "hud_record_label", "record_score_label", "game_over_score_label", "menu_panel", "game_over_panel", "start_game_panel", "pause_sfx", "resume_sfx")]
 process_mode = 2
 script = ExtResource("1_nt7q6")
 hud_hp_label = NodePath("HUDPanel/HBoxContainer/HPLabel")
@@ -24,6 +24,7 @@ record_score_label = NodePath("GameOverPanel/RecordScoreLabel")
 game_over_score_label = NodePath("GameOverPanel/CurrentScoreLabel")
 menu_panel = NodePath("MenuPanel")
 game_over_panel = NodePath("GameOverPanel")
+start_game_panel = NodePath("StartGamePanel")
 pause_sfx = NodePath("SFX/PauseSFX")
 resume_sfx = NodePath("SFX/ResumeSFX")
 
@@ -320,6 +321,46 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Quit"
 horizontal_alignment = 1
+
+[node name="StartGamePanel" type="Panel" parent="." unique_id=2043641145]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameNameLabel" type="Label" parent="StartGamePanel" unique_id=1402832678]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -110.0
+offset_right = 90.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Breakout"
+label_settings = ExtResource("3_yev5y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="StartGamePanel" unique_id=955658518]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = 140.0
+offset_right = 114.0
+offset_bottom = 163.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press \"Space\" to launch ball..."
 
 [node name="SFX" type="Node2D" parent="." unique_id=1790548051]
 

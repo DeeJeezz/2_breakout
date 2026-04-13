@@ -13,10 +13,27 @@ class_name UI
 @export_category("Panels")
 @export var menu_panel: Panel
 @export var game_over_panel: Panel
+@export var start_game_panel: Panel
 
 @export_category("SFX")
 @export var pause_sfx: AudioStreamPlayer
 @export var resume_sfx: AudioStreamPlayer
+
+
+func prepare_game(record_score: int) -> void:
+	if record_score > 0:
+		hud_record_label.text = "%s" % record_score
+	else:
+		hud_record_label.text = ""
+	start_game_panel.show()
+	
+	
+func show_start_screen() -> void:
+	start_game_panel.show()
+	
+	
+func hide_start_screen() -> void:
+	start_game_panel.hide()
 
 
 func set_hp(hp: int) -> void:
@@ -43,12 +60,7 @@ func game_over(score: int) -> void:
 	
 	
 func set_record_score(score: int) -> void:
-	if score > 0:
-		hud_record_label.text = "%s" % score
-	else:
-		hud_record_label.text = ""
 	record_score_label.text = "Max score: %s" % score
-	print(record_score_label.text)
 
 
 func _on_restart_button_button_down() -> void:

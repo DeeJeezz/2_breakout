@@ -8,6 +8,7 @@ https://20_games_challenge.gitlab.io/games/breakout/
 ## Where to play
 
 Itch.io - https://deejeezz.itch.io/breakout
+
 Github Pages - https://deejeezz.github.io/2_breakout/
 
 ## Description
